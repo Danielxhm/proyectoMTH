@@ -1,0 +1,93 @@
+{
+  "frames": {
+    "Gemini_Generated_Image_2b7moy2b7moy2b7m.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_3barr83barr83bar.png": {
+      "frame": {
+        "x": 1567,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_65oiha65oiha65oi.png": {
+      "frame": {
+        "x": 3134,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_cfqlizcfqlizcfql.png": {
+      "frame": {
+        "x": 4701,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_cw35stcw35stcw35.png": {
+      "frame": {
+        "x": 6268,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_ifepusifepusifep.png": {
+      "frame": {
+        "x": 7835,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_jfhapgjfhapgjfha.png": {
+      "frame": {
+        "x": 9402,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_kj03y7kj03y7kj03.png": {
+      "frame": {
+        "x": 10969,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_rkbe4crkbe4crkbe.png": {
+      "frame": {
+        "x": 12536,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    },
+    "Gemini_Generated_Image_ueo68tueo68tueo6.png": {
+      "frame": {
+        "x": 14103,
+        "y": 0,
+        "w": 1567,
+        "h": 979
+      }
+    }
+  },
+  "meta": {
+    "image": "spritesheet.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 15672,
+      "h": 980
+    },
+    "scale": "1"
+  }
+}

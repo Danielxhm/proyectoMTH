@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina La Derivada</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css?v=2">
+    <link rel="stylesheet" href="css/loading.css?v=2">
+    <link rel="stylesheet" href="css/home.css?v=2">
+    <link rel="stylesheet" href="css/game.css?v=2">
+    <link rel="stylesheet" href="css/celebration.css?v=2">
+    <link rel="stylesheet" href="css/transition.css?v=2">
+
+    <script src="https://pixijs.download/v7.3.2/pixi.min.js"></script>
+</head>
+<body>
+    <div id="fullscreen-prompt" class="app-layer is-visible">
+        <div class="fullscreen-icon"></div>
+        <div class="prompt-text">Haz clic para iniciar</div>
+    </div>
+
+    <section id="loading-screen" class="app-layer" aria-label="Carga inicial">
+        <div id="loading-container">
+            <img src="assets/loadings/loading.png" alt="Loading" class="loading-logo">
+            <div class="loading-text" id="status-text">Cargando Sistema...</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="flash-overlay"></div>
+
+    <section id="video-screen" class="app-layer" aria-label="Video de entrada">
+        <video id="intro-video" playsinline preload="auto">
+            <source src="assets/init/render.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <main id="home-container" class="app-layer" aria-label="Pantalla principal">
+        <div id="home-loader">
+            <div class="spinner"></div>
+            <p id="load-label">Preparando Entorno</p>
+            <div id="home-load-progress">0%</div>
+        </div>
+
+        <div id="pixi-bg"></div>
+
+        <button class="btn-icon" id="btn-audio" title="Audio" aria-label="Silenciar o activar audio">
+            <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+            <svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+        </button>
+
+        <div id="menu-overlay">
+            <div class="menu-content" id="menu-content">
+                <p class="difficulty-label">DIFICULTAD</p>
+                <div class="btn-row">
+                    <button class="btn" id="btn-lin" data-game-level="lineal">Lineales</button>
+                </div>
+                <div class="btn-row">
+                    <button class="btn" id="btn-cuad" data-game-level="cuadratica">Cuadráticas</button>
+                </div>
+                <div class="btn-row">
+                    <button class="btn" id="btn-trig" data-game-level="trigonometrica">Trigonométricas</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="game-container" class="app-layer" aria-label="Juego de derivadas">
+        <div class="game-shell">
+            <header class="game-topbar">
+                <div class="game-brand"></div>
+                <div class="game-stats">
+                    <div class="game-stat">
+                        <span class="game-stat-label">Nivel</span>
+                        <span id="hud-level">Sin seleccionar</span>
+                    </div>
+                    <div class="game-stat">
+                        <span class="game-stat-label">Puntos</span>
+                        <span id="hud-score">0</span>
+                    </div>
+                    <div class="game-stat">
+                        <span class="game-stat-label">Tiempo</span>
+                        <span id="hud-time">--</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="game-main" aria-live="polite">
+                <section id="screen-game" class="game-screen is-active">
+                    <div id="game-pixi-bg"></div>
+
+                    <div class="game-panel">
+                        <div class="round-head">
+                            <div id="question-counter">Pregunta 1 de 10</div>
+                            <div id="streak-display">Racha: 0</div>
+                        </div>
+
+                        <div class="timer-track" aria-hidden="true">
+                            <div id="timer-progress" class="timer-progress"></div>
+                        </div>
+
+                        <div class="prompt-block">
+                            <p>Selecciona la derivada correcta de:</p>
+                            <div class="function-block">
+                                <span>f(x) = </span>
+                                <span id="function-display-text">3x + 5</span>
+                            </div>
+                        </div>
+
+                        <div id="options-grid" class="options-grid"></div>
+                        <div id="feedback-box" class="feedback-box" aria-live="polite"></div>
+                    </div>
+                </section>
+
+                <section id="screen-result" class="game-screen">
+                    <div class="result-panel">
+                        <h2>Sesión completada</h2>
+                        <div class="result-score" id="result-score">0</div>
+                        <div class="result-meta">
+                            <div><span>Aciertos</span><strong id="stat-correct">0</strong></div>
+                            <div><span>Errores</span><strong id="stat-wrong">0</strong></div>
+                            <div><span>Precisión</span><strong id="stat-accuracy">0%</strong></div>
+                        </div>
+                        <div class="result-actions">
+                            <button id="btn-retry" class="game-action game-action-primary" type="button">Jugar otra vez</button>
+                            <button id="btn-menu" class="game-action game-action-secondary" type="button">Cambiar nivel</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </section>
+
+    <script src="js/loading.js?v=7"></script>
+    <script src="js/home.js?v=7"></script>
+    <script src="js/game.js?v=7"></script>
+    <script src="js/main.js?v=7"></script>
+</body>
+</html>
