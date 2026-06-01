@@ -35,9 +35,19 @@
         -webkit-mask-size: 80px;
     }
 
-    72% {
-        mask-size: 420vmax;
-        -webkit-mask-size: 420vmax;
+    30% {
+        mask-size: 120px;
+        -webkit-mask-size: 120px;
+    }
+
+    55% {
+        mask-size: 260vmax;
+        -webkit-mask-size: 260vmax;
+    }
+
+    80% {
+        mask-size: 720vmax;
+        -webkit-mask-size: 720vmax;
     }
 
     100% {
