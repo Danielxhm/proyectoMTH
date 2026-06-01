@@ -59,7 +59,7 @@ function returnToHomeMenu() {
         }, 500);
     }
 
-    // Ponemos el menú de nuevo, ¡chivísimo!
+    // Ponemos el menú de nuevo
     if (homeContainer) {
         homeContainer.classList.add('is-visible');
         homeContainer.removeAttribute('inert');
@@ -100,7 +100,7 @@ window.LoadingScreen.init();
         }, 1200);
     };
 
-    // Aquí capturamos cuando el usuario le da clic a un nivel, fluyendo como mantequilla
+    // Aquí capturamos cuando el usuario le da clic a un nivel
     document.addEventListener('click', function (event) {
         var button = event.target.closest('.btn[data-game-level]');
         if (button) {

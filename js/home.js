@@ -7,7 +7,7 @@ const HomeScreen = {
     },
 
     async setup() {
-        // Configuramos los volados de la animación y dónde va el menú
+        // Configuramos los assets de la animación y dónde va el menú
         this.MENU_AX = 0.65;
         this.MENU_AY = 0.57;
         this.TOTAL_FRAMES = 300;

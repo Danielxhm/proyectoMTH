@@ -121,7 +121,7 @@ const GameScreen = {
         this.app.stage.addChild(this.bgSpriteB);
 
         try {
-            // Traemos todas las imágenes de un solo para que no nos de casaca después
+            // Traemos todas las imágenes de un solo para que no nos quede mal después
             this.spritesheet = await PIXI.Assets.load('assets/questions/spritesheet.json');
             
             if (this.spritesheet && this.spritesheet.textures) {
@@ -146,12 +146,12 @@ const GameScreen = {
         this.resizePixi();
         window.addEventListener('resize', () => this.resizePixi());
 
-        // Si el usuario pone pantalla completa, reacomodamos todo para que no se vea fiero
+        // Si el usuario pone pantalla completa, reacomodamos todo para que no se vea feo
         document.addEventListener('fullscreenchange', () => {
             if (this.app) {
                 this.app.resize();
                 this.resizePixi();
-                // Le damos otro retoque por si las moscas, para que quede bien centrado
+                // Le damos otro retoque por si alcazo, para que quede bien centrado
                 requestAnimationFrame(() => {
                     this.app.resize();
                     this.resizePixi();
@@ -664,7 +664,7 @@ const GameScreen = {
             const speed = Math.random() * 8 + 4;
             const angle = Math.random() * Math.PI * 2;
             const vx = Math.cos(angle) * speed;
-            const vy = Math.sin(angle) * speed;
+            let vy = Math.sin(angle) * speed;
             let gravity = 0.15;
             
             container.addChild(particle);
